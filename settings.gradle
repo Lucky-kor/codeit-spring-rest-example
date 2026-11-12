@@ -1,0 +1,2 @@
+// Gradle 프로젝트 이름입니다. HTTP 경로나 API 문서 버전과는 별개입니다.
+rootProject.name = 'codeit-spring-rest-example'

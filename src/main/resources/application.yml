@@ -1,0 +1,19 @@
+# API 문서화 설정. DB 연결 설정은 없으며 상품은 메모리 Map에 저장됩니다.
+# server.port를 지정하지 않았으므로 기본 HTTP 포트는 8080입니다.
+springdoc:
+  # 기계가 읽을 수 있는 OpenAPI 명세: /v3/api-docs (그룹: /v3/api-docs/product).
+  api-docs:
+    enabled: true
+  # 브라우저에서 보는 문서/호출 화면. /docs로 접속하면 UI 경로로 이동할 수 있습니다.
+  swagger-ui:
+    path: /docs
+    enabled: true
+    document-title: "Codeit Example Application"
+  # 문서에서 사용할 기본 응답 형식입니다. 실제 메서드의 produces 매핑을 대신하지 않습니다.
+  default-produces-media-type: application/json
+  # SwaggerConfig의 ${springdoc.info.*}가 참조하는 프로젝트 메타데이터입니다.
+  # 여기의 V1은 문서 정보 버전이며 URI /v2 또는 Accept 버전 선택을 바꾸지 않습니다.
+  info:
+    title: "Codeit Example Application"
+    description: "Spring swagger example documents"
+    version: "V1"

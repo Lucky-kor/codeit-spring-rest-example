@@ -1,0 +1,50 @@
+// Gradle은 의존성 다운로드, Java 컴파일, 테스트, 애플리케이션 실행을 자동화합니다.
+// 저장소의 gradlew(Windows: gradlew.bat)를 쓰면 wrapper에 지정된 Gradle 버전으로 실행됩니다.
+plugins {
+    // Java 컴파일/테스트 작업을 추가합니다.
+    id 'java'
+    // Spring Boot 실행(bootRun) 및 실행 가능한 아카이브(bootJar)를 지원합니다.
+    id 'org.springframework.boot' version '4.1.2'
+    // Spring Boot의 의존성 버전 관리와 연동합니다.
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.codeit'
+version = '0.0.1-SNAPSHOT'
+description = 'codeit-spring-rest-example'
+
+java {
+    toolchain {
+        // 프로젝트 컴파일 도구 체인은 Java 17입니다. Gradle 실행 JVM과는 구분됩니다.
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    // 라이브러리를 내려받을 공개 Maven 저장소입니다.
+    mavenCentral()
+}
+
+dependencies {
+    // Spring MVC, JSON 변환, 내장 웹 서버를 통한 HTTP API 구현.
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    // @Valid, @NotBlank, @Min 등의 Bean Validation 실행 지원.
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // EntityModel과 linkTo/methodOn 등 하이퍼미디어 링크 지원.
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    // Lombok은 컴파일 시 생성자/getter 등을 생성합니다. 런타임 라이브러리로 사용하지 않습니다.
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    // Spring Boot 테스트 및 MVC 테스트 지원. test* 설정은 테스트 코드에 적용됩니다.
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    // Controller/DTO의 메타데이터로 OpenAPI 명세와 Swagger UI를 제공합니다.
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0'
+}
+
+tasks.named('test') {
+    // @Test가 붙은 JUnit Jupiter 테스트를 실행할 플랫폼을 선택합니다.
+    useJUnitPlatform()
+}
